@@ -170,7 +170,7 @@ if page == "🏠 Home & Overview":
             <p>Solving systems of linear equations to understand gravitational forces and satellite orbits. This module covers Kepler's Laws.</p>
             <small>Common Core Standards: A-REI.5, A-REI.6</small>
         </div>
-        """, unsafe_allow_html_true=True)
+        """, unsafe_allow_html=True)
         
         st.markdown("""
         <div class="module-card">
