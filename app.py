@@ -201,8 +201,6 @@ elif page == "✈️ Flight Trajectories":
         <p>The height $h$ (in meters) of a projectile launched from the ground after $t$ seconds can be modeled by the equation $h(t) = -4.9t^2 + v_0 t$, where $v_0$ is the initial vertical velocity. This equation is a quadratic function, and its graph is a parabola. The motion of an aircraft or rocket is a real-world example of this parabolic motion. </p>
         <p>Use the slider below to change the initial velocity and see how it affects the projectile's flight path. Notice how a higher initial velocity results in a higher and longer flight.</p>
         
-        <br>
-        
         <h5>Interactive Simulator</h5>
     </div>
     """, unsafe_allow_html=True)
@@ -275,8 +273,6 @@ elif page == "🛰️ Orbital Mechanics":
     st.markdown("""
     <div class="activity-box">
         <p>where $x$ and $y$ represent unknown variables. Your task is to solve this system for $x$ and $y$ to find the balanced state, which is the precise configuration for a stable orbit.</p>
-        
-        <br>
         
         <h5>Solve the System:</h5>
         
