@@ -11,7 +11,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for an aerospace theme
+# Custom CSS for an aerospace theme with a new font
 # This CSS uses a modern, clean design with a space-themed color palette.
 # Fonts are selected for readability and style.
 # The layout is responsive and includes subtle animations for a polished feel.
@@ -20,7 +20,7 @@ st.markdown("""
     @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Inter:wght@400;700&display=swap');
 
     body {
-        font-family: 'Merriweather', serif;
+        font-family: 'Inter', sans-serif; /* Use Inter as the main font */
         color: #333333;
     }
     
@@ -102,6 +102,17 @@ st.markdown("""
     /* Ensure the Streamlit LaTeX component uses the modern font */
     .st-be.st-bf.st-bg.st-bh.st-bi.st-bj.st-bk.st-bl {
         font-family: 'Inter', sans-serif !important;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Inter', sans-serif !important;
+        font-weight: 700;
+        color: #0a1f44;
+    }
+    p, li, div, label, span {
+        font-family: 'Inter', sans-serif !important;
+        font-weight: 400;
+        color: #333333;
     }
 </style>
 """, unsafe_allow_html=True)
