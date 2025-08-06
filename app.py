@@ -131,7 +131,7 @@ st.sidebar.title("📚 Modules")
 page = st.sidebar.selectbox(
     "Choose a section:",
     ["🏠 Home & Overview", "✈️ Flight Trajectories", "🛰️ Orbital Mechanics",
-     "🚀 Rocket Science", "👨‍🚀 Aaron's Lunar Mission", "📊 Quiz: The Flight Test"]
+     "🚀 Rocket Science", "👨‍🚀 Aaron's Lunar Mission", "📊 Quiz: The Flight Test", "📚 External Resources"]
 )
 
 # Home Page
@@ -370,15 +370,19 @@ elif page == "👨‍🚀 Aaron's Lunar Mission":
         <p>Answer: It will take approximately **2.84 days** for Aaron to reach the Moon.</p>
     </div>
     """, unsafe_allow_html=True)
-
+    
+# External Resources Page
+elif page == "📚 External Resources":
+    st.title("📚 External Resources")
+    st.header("Learn More About Aerospace Engineering")
+    
     st.markdown("""
     <div class="resources-box">
-        <h4>External Resources:</h4>
-        <p>For more information on the real-world engineering problem Aaron is solving, check out this link about the proposed lunar power station:</p>
-        <a href="https://www.nasa.gov/space-technology-mission-directorate/tdm/fission-surface-power/" target="_blank">NASA's Fission Surface Power Project</a>
-        <br>
-        <p>You can also learn about opportunities and resources from the **National Society of Black Engineers (NSBE)** Aerospace Special Interest Group:</p>
-        <a href="https://www.nsbe-aerospace.org/" target="_blank">NSBE Aerospace</a>
+        <p>For more information on real-world engineering problems, check out these links:</p>
+        <ul>
+            <li><a href="https://www.nasa.gov/space-technology-mission-directorate/tdm/fission-surface-power/" target="_blank">NASA's Fission Surface Power Project</a></li>
+            <li><a href="https://www.nsbe-aerospace.org/" target="_blank">National Society of Black Engineers (NSBE) Aerospace</a></li>
+        </ul>
     </div>
     """, unsafe_allow_html=True)
 
