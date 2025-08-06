@@ -14,6 +14,13 @@ st.set_page_config(
 # Custom CSS for an aerospace theme
 st.markdown("""
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Inter:wght@400;700&display=swap');
+
+    body {
+        font-family: 'Merriweather', serif;
+        color: #333333;
+    }
+    
     .main-header {
         background: linear-gradient(45deg, #0a1f44, #12345e);
         color: #e0e7ff;
@@ -24,6 +31,7 @@ st.markdown("""
         box-shadow: 0 8px 16px rgba(0,0,0,0.3);
     }
     .main-header h1 {
+        font-family: 'Inter', sans-serif;
         font-size: 3rem;
         text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     }
@@ -305,6 +313,9 @@ elif page == "👨‍🚀 Aaron's Lunar Mission":
         <h4>External Resources:</h4>
         <p>For more information on the real-world engineering problem Aaron is solving, check out this link about the proposed lunar power station:</p>
         <a href="https://www.nasa.gov/space-technology-mission-directorate/tdm/fission-surface-power/" target="_blank">NASA's Fission Surface Power Project</a>
+        <br>
+        <p>You can also learn about opportunities and resources from the **National Society of Black Engineers (NSBE)** Aerospace Special Interest Group:</p>
+        <a href="https://www.nsbe-aerospace.org/" target="_blank">NSBE Aerospace</a>
     </div>
     """, unsafe_allow_html=True)
 
