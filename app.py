@@ -91,6 +91,18 @@ st.markdown("""
         background-color: #0056b3;
         transform: translateY(-2px);
     }
+    
+    /* Specific styling for LaTeX to improve appearance */
+    .stMarkdown p code, .stMarkdown .st-bv .st-cd .st-bw .st-by {
+        font-family: 'Inter', sans-serif !important;
+        font-size: 1.2rem;
+        color: #0a1f44;
+    }
+    
+    /* Ensure the Streamlit LaTeX component uses the modern font */
+    .st-be.st-bf.st-bg.st-bh.st-bi.st-bj.st-bk.st-bl {
+        font-family: 'Inter', sans-serif !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -107,7 +119,7 @@ st.markdown("""
 st.sidebar.title("📚 Modules")
 page = st.sidebar.selectbox(
     "Choose a section:",
-    ["🏠 Home & Overview", "✈️ Flight Trajectories", "🛰️ Orbital Mechanics", 
+    ["🏠 Home & Overview", "✈️ Flight Trajectories", "🛰️ Orbital Mechanics",
      "🚀 Rocket Science", "👨‍🚀 Aaron's Lunar Mission", "📊 Quiz: The Flight Test"]
 )
 
@@ -187,9 +199,6 @@ elif page == "✈️ Flight Trajectories":
     initial_velocity = st.slider('Select Initial Velocity ($v_0$ in m/s)', 10, 100, 50, 5)
     
     # Calculate the time to reach the ground (t_final)
-    # The equation is h(t) = -4.9t^2 + v0*t = 0
-    # t * (-4.9t + v0) = 0
-    # So t = 0 or t = v0/4.9
     time_to_ground = initial_velocity / 4.9
     
     t = np.linspace(0, time_to_ground, 100)
@@ -197,12 +206,13 @@ elif page == "✈️ Flight Trajectories":
     
     df = pd.DataFrame({'Time (s)': t, 'Height (m)': h})
     
+    # Use a modern seaborn style for the plot
+    plt.style.use('seaborn-v0_8-whitegrid')
     fig, ax = plt.subplots()
-    ax.plot(df['Time (s)'], df['Height (m)'])
-    ax.set_title('Projectile Trajectory')
-    ax.set_xlabel('Time (s)')
-    ax.set_ylabel('Height (m)')
-    ax.grid(True)
+    ax.plot(df['Time (s)'], df['Height (m)'], color='#12345e', linewidth=2)
+    ax.set_title('Projectile Trajectory', fontsize=16)
+    ax.set_xlabel('Time (s)', fontsize=12)
+    ax.set_ylabel('Height (m)', fontsize=12)
     
     st.pyplot(fig)
     
@@ -241,8 +251,18 @@ elif page == "🛰️ Orbital Mechanics":
     <div class="activity-box">
         <h4>🎯 Activity: "Solving for Force and Mass"</h4>
         <p>In orbital mechanics, forces and masses must be in perfect balance for a stable orbit. This balance can be represented by a system of linear equations. Consider the following system of equations representing forces acting on a satellite:</p>
-        <p>$3x + 2y = 12$</p>
-        <p>$5x - y = 7$</p>
+    </div>
+    """)
+    
+    st.latex(r"""
+    3x + 2y = 12
+    """)
+    st.latex(r"""
+    5x - y = 7
+    """)
+
+    st.markdown("""
+    <div class="activity-box">
         <p>where $x$ and $y$ represent unknown variables. Your task is to solve this system for $x$ and $y$ to find the balanced state, which is the precise configuration for a stable orbit.</p>
         
         <br>
@@ -279,7 +299,17 @@ elif page == "🚀 Rocket Science":
     st.markdown("""
     <div class="activity-box">
         <h4>🎯 Activity: "Simulating Rocket Fuel Consumption"</h4>
-        <p>A rocket's fuel consumption can be modeled by an exponential decay function. This is because a rocket expels a fraction of its remaining fuel over a given time interval. The mass of a rocket's fuel (in metric tons) over time is given by the function $M(t) = 1000 \cdot (0.9)^t$, where $t$ is the time in minutes since launch.</p>
+        <p>A rocket's fuel consumption can be modeled by an exponential decay function. This is because a rocket expels a fraction of its remaining fuel over a given time interval. The mass of a rocket's fuel (in metric tons) over time is given by the function:</p>
+    </div>
+    """)
+
+    st.latex(r"""
+    M(t) = 1000 \cdot (0.9)^t
+    """)
+    
+    st.markdown("""
+    <div class="activity-box">
+        <p>where $t$ is the time in minutes since launch.</p>
         
         <br>
         
@@ -296,14 +326,15 @@ elif page == "🚀 Rocket Science":
     t_vals = np.linspace(0, 30, 300)
     m_vals = 1000 * (0.9)**t_vals
     
+    # Use a modern seaborn style for the plot
+    plt.style.use('seaborn-v0_8-whitegrid')
     fig, ax = plt.subplots()
-    ax.plot(t_vals, m_vals)
+    ax.plot(t_vals, m_vals, color='#4a7ab5', linewidth=2)
     ax.axvline(x=time_sim, color='red', linestyle='--', label=f't = {time_sim} min')
-    ax.set_title('Rocket Fuel Mass vs. Time')
-    ax.set_xlabel('Time (minutes)')
-    ax.set_ylabel('Fuel Mass (tons)')
+    ax.set_title('Rocket Fuel Mass vs. Time', fontsize=16)
+    ax.set_xlabel('Time (minutes)', fontsize=12)
+    ax.set_ylabel('Fuel Mass (tons)', fontsize=12)
     ax.legend()
-    ax.grid(True)
     
     st.pyplot(fig)
 
@@ -355,7 +386,11 @@ elif page == "📊 Quiz: The Flight Test":
     
     # Question 1
     st.subheader("Question 1: Quadratic Trajectory")
-    st.write("A rocket's height is given by the function $h(t) = -16t^2 + 192t$. What is the maximum height the rocket reaches?")
+    st.write("A rocket's height is given by the function:")
+    st.latex(r"""
+    h(t) = -16t^2 + 192t
+    """)
+    st.write("What is the maximum height the rocket reaches?")
     q1_options = ["A) 192 feet", "B) 576 feet", "C) 16 feet", "D) 12 seconds"]
     q1_answer = st.radio("Choose your answer:", options=q1_options, index=None)
     
@@ -369,7 +404,14 @@ elif page == "📊 Quiz: The Flight Test":
     
     # Question 2
     st.subheader("Question 2: Systems of Equations")
-    st.write("A force analysis results in the following system: $2x + y = 8$ and $x - y = 1$. What is the value of x?")
+    st.write("A force analysis results in the following system:")
+    st.latex(r"""
+    2x + y = 8
+    """)
+    st.latex(r"""
+    x - y = 1
+    """)
+    st.write("What is the value of x?")
     q2_answer = st.text_input("Enter your answer for x:", key="q2_input")
     
     if q2_answer:
