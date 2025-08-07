@@ -57,7 +57,7 @@ This program is designed to explore key mathematical concepts through the lens o
         """)
 
 # Module 1
-elif page == \"✈️ Flight Trajectories\":
+elif page == ✈️ Flight Trajectories:
     st.header("✈️ Module 1: Flight Trajectories")
     st.subheader("The Parabolic Path of Flight")
     st.markdown("""
