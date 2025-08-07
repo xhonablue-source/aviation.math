@@ -197,11 +197,45 @@ elif page == "🧑🏾‍🚀 Aaron's Lunar Mission":
 
 # Quiz Module
 elif page == "📊 Quiz: The Flight Test":
-    ...
+    st.header("📊 The Flight Test")
+
+    st.subheader("1. Quadratic Trajectory")
+    st.write("A rocket's height is given by the equation:")
+    st.latex(r"h(t) = -16t^2 + 192t")
+    answer_1 = st.radio("What is the maximum height the rocket reaches?",
+                        ["A. 192 ft", "B. 576 ft", "C. 16 ft", "D. 384 ft"], index=None)
+    if answer_1:
+        if answer_1 == "B. 576 ft":
+            st.success("Correct! Max height is found at vertex: t = 6, h(6) = 576 ft.")
+        else:
+            st.error("Incorrect. Use vertex formula: t = -b/2a = 6, then compute h(6).")
+
+    st.subheader("2. Solve the System")
+    st.write("Solve: 2x + y = 8 and x - y = 1")
+    user_input = st.text_input("Enter value of x:")
+    if user_input:
+        try:
+            if float(user_input) == 3:
+                st.success("Correct! x = 3")
+            else:
+                st.error("Incorrect. Try elimination or substitution.")
+        except:
+            st.warning("Please enter a valid number.")
+
+    st.subheader("3. Exponential Decay")
+    st.write("A satellite's solar panel efficiency drops 5% annually. What's the equation for E(t)?")
+    answer_3 = st.text_input("Enter equation for E(t):")
+    if answer_3:
+        if "100 * (0.95)**t" in answer_3.replace(" ", "") or "100*(0.95)^t" in answer_3.replace(" ", ""):
+            st.success("Correct! E(t) = 100 * (0.95)^t")
+        else:
+            st.error("Incorrect. Remember 5% loss means 95% remains.")
 
 # Resources
 elif page == "📚 External Resources":
-    ...
+    st.header("📚 External Resources")
+    st.markdown("- [NASA's Fission Surface Power Project](https://www.nasa.gov/space-technology-mission-directorate/tdm/fission-surface-power/)")
+    st.markdown("- [NSBE Aerospace](https://www.nsbe-aerospace.org/)")
 
 st.markdown("""
 ---
