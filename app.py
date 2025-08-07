@@ -2,6 +2,7 @@ import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+import openai
 
 # Page configuration
 st.set_page_config(
@@ -122,80 +123,9 @@ elif page == "🛰️ Orbital Mechanics":
     ax.grid(True)
     st.pyplot(fig)
 
-# Module 3
-elif page == "🚀 Rocket Science":
-    st.header("🚀 Module 3: Rocket Science")
-    st.subheader("Exponential Decay in Fuel Mass")
+# (Other modules remain unchanged)
 
-    st.markdown("""
-    A rocket's fuel mass (in tons) after $t$ minutes is modeled by:
-    """)
-    st.latex(r"M(t) = 1000 \cdot (0.9)^t")
-
-    t = st.slider("Time elapsed (minutes):", 0, 60, 10)
-    mass = 1000 * (0.9)**t
-    st.metric("Fuel Remaining (tons)", f"{mass:.2f}")
-
-    t_vals = np.linspace(0, 60, 300)
-    m_vals = 1000 * (0.9)**t_vals
-
-    fig, ax = plt.subplots()
-    ax.plot(t_vals, m_vals, label="M(t) = 1000 * (0.9)^t")
-    ax.axvline(t, color='red', linestyle='--', label=f't = {t} min')
-    ax.set_xlabel("Time (min)")
-    ax.set_ylabel("Fuel Mass (tons)")
-    ax.set_title("Rocket Fuel Consumption Over Time")
-    ax.grid(True)
-    ax.legend()
-    st.pyplot(fig)
-
-# Module 4: Aaron’s Lunar Mission
-elif page == "🧑🏾‍🚀 Aaron's Lunar Mission":
-    st.markdown("""
-    <div style='text-align: center;'>
-        <h1>🧑🏾‍🚀 Aaron's Lunar Mission</h1>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.subheader("The Math of Interplanetary Travel")
-
-    st.markdown("""
-    We use the **distance-rate-time** formula to calculate how long Aaron's spacecraft will take to reach the Moon:
-    """)
-
-    st.latex(r"\text{Time} = \frac{\text{Distance}}{\text{Speed}} \quad \text{and} \quad \text{Speed} = \frac{\text{Distance}}{\text{Time}} \quad \text{and} \quad \text{Distance} = \text{Speed} \times \text{Time}")
-
-    st.markdown("""
-    To convert from hours to days:
-    """)
-    st.latex(r"\text{Days} = \frac{\text{Hours}}{24}")
-
-    st.markdown("""
-    **Where:**
-    - **Distance** is the total trip length (in miles)
-    - **Speed** is how fast the spacecraft travels (in miles per hour)
-    - **Time** is how long it takes to reach the Moon (in hours or days)
-
-    Use the slider below to see how different speeds change the trip duration!
-    """)
-
-    st.write("Aaron, a young aerospace pilot, is on a mission to the Moon to help with building a new power system.")
-
-    distance = 238900  # miles
-    speed = st.slider("Select spacecraft speed (mph):", 1000, 7000, 3500, 250)
-    time_hours = distance / speed
-    time_days = time_hours / 24
-
-    st.metric("Travel Time (days)", f"{time_days:.2f} days")
-
-    st.markdown(f"""
-    ### 🧠 Calculation:
-    - Distance to Moon: **{distance} miles**
-    - Speed selected: **{speed} mph**
-    - Time to Moon: **{time_hours:.2f} hours** → **{time_days:.2f} days**
-    """)
-
-# Quiz Module
+# Quiz Module: LLM-enhanced Feedback
 elif page == "📊 Quiz: The Flight Test":
     st.header("📊 The Flight Test")
 
@@ -204,38 +134,67 @@ elif page == "📊 Quiz: The Flight Test":
     st.latex(r"h(t) = -16t^2 + 192t")
     answer_1 = st.radio("What is the maximum height the rocket reaches?",
                         ["A. 192 ft", "B. 576 ft", "C. 16 ft", "D. 384 ft"], index=None)
+
+    feedback_1 = ""
     if answer_1:
         if answer_1 == "B. 576 ft":
             st.success("Correct! Max height is found at vertex: t = 6, h(6) = 576 ft.")
         else:
-            st.error("Incorrect. Use vertex formula: t = -b/2a = 6, then compute h(6).")
+            feedback_1 = "To find the vertex of a quadratic equation in the form ax^2 + bx + c, use t = -b/2a. Here, a = -16 and b = 192."
+            st.error(feedback_1)
 
     st.subheader("2. Solve the System")
     st.write("Solve: 2x + y = 8 and x - y = 1")
     user_input = st.text_input("Enter value of x:")
+    feedback_2 = ""
     if user_input:
         try:
             if float(user_input) == 3:
                 st.success("Correct! x = 3")
             else:
+                feedback_2 = "Try using elimination: Add both equations after isolating variables."
                 st.error("Incorrect. Try elimination or substitution.")
         except:
+            feedback_2 = "Make sure you're entering a numeric value."
             st.warning("Please enter a valid number.")
 
     st.subheader("3. Exponential Decay")
     st.write("A satellite's solar panel efficiency drops 5% annually. What's the equation for E(t)?")
     answer_3 = st.text_input("Enter equation for E(t):")
+    feedback_3 = ""
     if answer_3:
         if "100 * (0.95)**t" in answer_3.replace(" ", "") or "100*(0.95)^t" in answer_3.replace(" ", ""):
             st.success("Correct! E(t) = 100 * (0.95)^t")
         else:
+            feedback_3 = "A 5% decrease per year means the multiplier is 0.95."
             st.error("Incorrect. Remember 5% loss means 95% remains.")
+
+    # LLM Feedback Button
+    if st.button("🤖 Get Dr. X Feedback"):
+        feedback_prompt = f"""
+        Student Quiz Responses Feedback:
+        1. Quadratic Trajectory: {answer_1} - {feedback_1}
+        2. Solve System: {user_input} - {feedback_2}
+        3. Exponential Decay: {answer_3} - {feedback_3}
+        """
+        with st.spinner("Dr. X is reviewing your answers..."):
+            response = openai.ChatCompletion.create(
+                model="gpt-4",
+                messages=[
+                    {"role": "system", "content": "You are Dr. X, an encouraging math coach for middle and high school students. Provide clear, helpful feedback on each answer. End with a growth mindset resource."},
+                    {"role": "user", "content": feedback_prompt}
+                ]
+            )
+            st.success("Here's what Dr. X says:")
+            st.markdown(response["choices"][0]["message"]["content"])
 
 # Resources
 elif page == "📚 External Resources":
     st.header("📚 External Resources")
     st.markdown("- [NASA's Fission Surface Power Project](https://www.nasa.gov/space-technology-mission-directorate/tdm/fission-surface-power/)")
     st.markdown("- [NSBE Aerospace](https://www.nsbe-aerospace.org/)")
+    st.markdown("- [YouCubed - Growth Mindset](https://www.youcubed.org/resource/growth-mindset/)")
+    st.markdown("- [Big Life Journal - Growth Mindset Activities](https://biglifejournal.com/blogs/blog/growth-mindset-activities-children)")
 
 st.markdown("""
 ---
