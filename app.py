@@ -11,230 +11,446 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# Custom CSS for an aerospace theme with a new font
+# This CSS uses a modern, clean design with a space-themed color palette.
+# Fonts are selected for readability and style.
+# The layout is responsive and includes subtle animations for a polished feel.
+st.markdown("""
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Inter:wght@400;700&display=swap');
+
+    body {
+        font-family: 'Inter', sans-serif; /* Use Inter as the main font */
+        color: #333333;
+    }
+    
+    .main-header {
+        background: linear-gradient(45deg, #0a1f44, #12345e);
+        color: #e0e7ff;
+        padding: 2.5rem;
+        border-radius: 15px;
+        text-align: center;
+        margin-bottom: 2rem;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    }
+    .main-header h1 {
+        font-family: 'Inter', sans-serif;
+        font-size: 3rem;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+    .module-card {
+        background: #e0e7ff;
+        color: #0a1f44;
+        padding: 1.5rem;
+        border-radius: 12px;
+        margin: 1rem 0;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .module-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+    }
+    .concept-box {
+        background: #f1f5ff;
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin: 1rem 0;
+        border-left: 4px solid #4a7ab5;
+    }
+    .activity-box {
+        background: #e9f0ff;
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin: 1rem 0;
+        border-left: 4px solid #007bff;
+    }
+    .standards-box {
+        background: #e6f7ff;
+        padding: 1rem;
+        border-radius: 8px;
+        margin: 1rem 0;
+        border-left: 4px solid #00a2d9;
+    }
+    .resources-box {
+        background: #e6fff0;
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin: 1rem 0;
+        border-left: 4px solid #28a745;
+    }
+    .stButton>button {
+        background-color: #007bff;
+        color: white;
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+        border: none;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    .stButton>button:hover {
+        background-color: #0056b3;
+        transform: translateY(-2px);
+    }
+    
+    /* Specific styling for LaTeX to improve appearance */
+    .stMarkdown p code, .stMarkdown .st-bv .st-cd .st-bw .st-by {
+        font-family: 'Inter', sans-serif !important;
+        font-size: 1.2rem;
+        color: #0a1f44;
+    }
+    
+    /* Ensure the Streamlit LaTeX component uses the modern font */
+    .st-be.st-bf.st-bg.st-bh.st-bi.st-bj.st-bk.st-bl {
+        font-family: 'Inter', sans-serif !important;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Inter', sans-serif !important;
+        font-weight: 700;
+        color: #0a1f44;
+    }
+    p, li, div, label, span {
+        font-family: 'Inter', sans-serif !important;
+        font-weight: 400;
+        color: #333333;
+    }
+</style>
+""", unsafe_allow_html=True)
+
 # Header
-st.title("✈️ AEROSPACE 🚀")
-st.subheader("An Interactive Math & Engineering Curriculum")
-st.write("Exploring the mathematics behind flight and space exploration")
+st.markdown("""
+<div class="main-header">
+    <h1>✈️ AEROSPACE 🚀</h1>
+    <h3>An Interactive Math & Engineering Curriculum</h3>
+    <p>Exploring the mathematics behind flight and space exploration</p>
+</div>
+""", unsafe_allow_html=True)
 
 # Sidebar navigation
 st.sidebar.title("📚 Modules")
 page = st.sidebar.selectbox(
     "Choose a section:",
     ["🏠 Home & Overview", "✈️ Flight Trajectories", "🛰️ Orbital Mechanics",
-     "🚀 Rocket Science", "🧑🏾‍🚀 Aaron's Lunar Mission", "📊 Quiz: The Flight Test", "📚 External Resources"]
+     "🚀 Rocket Science", "👨‍🚀 Aaron's Lunar Mission", "📊 Quiz: The Flight Test", "📚 External Resources"]
 )
 
 # Home Page
 if page == "🏠 Home & Overview":
-    st.header("Welcome to the Aerospace Curriculum!")
     st.markdown("""
-This program is designed to explore key mathematical concepts through the lens of aerospace engineering. You will discover how algebra, trigonometry, and calculus are essential tools for designing aircraft, launching rockets, and navigating the solar system.
-""")
-    
-    cols = st.columns(2)
-    with cols[0]:
-        st.info("""
-        **Module 1: Flight Trajectories**  
-        The mathematics of flight paths using quadratic equations. Learn how to calculate a plane's altitude and trajectory.  
-        Common Core Standards: A-REI.4b, F-IF.7a
-        """)
-        st.info("""
-        **Module 3: Rocket Science**  
-        Exploring exponential growth and decay in rocket propulsion. Understand the Tsiolkovsky rocket equation and its impact on space travel.  
-        Common Core Standards: A-CED.1, F-LE.1
-        """)
-    
-    with cols[1]:
-        st.info("""
-        **Module 2: Orbital Mechanics**  
-        Solving systems of linear equations to understand gravitational forces and satellite orbits. This module covers Kepler's Laws.  
-        Common Core Standards: A-REI.5, A-REI.6
-        """)
-        st.info("""
-        **Module 4: The Flight Test**  
-        A comprehensive quiz to test your knowledge across all key concepts. Put your new aerospace math skills to the test!  
-        Assessment of all key concepts.
-        """)
+    ## Welcome to the Aerospace Curriculum!
 
-# Module 1
-elif page == ✈️ Flight Trajectories:
-    st.header("✈️ Module 1: Flight Trajectories")
-    st.subheader("The Parabolic Path of Flight")
-    st.markdown("""
-    In this module, we examine the equation of a projectile's vertical motion:
-    
-    $$h(t) = -4.9t^2 + v_0 t$$
+    This program is designed to explore key mathematical concepts through the lens of aerospace engineering. You will discover how algebra, trigonometry, and calculus are essential tools for designing aircraft, launching rockets, and navigating the solar system.
 
-    **Where:**
-    - $h(t)$ is the height (in meters) after $t$ seconds
-    - $t$ is time in seconds since launch
-    - $v_0$ is the initial vertical velocity (in meters per second)
-    - The constant -4.9 represents half of the gravitational acceleration ($g pprox 9.8$ m/s²) on Earth
-    
-    This formula models the upward and downward motion of an object launched straight up.
+    The curriculum is structured into four main modules, each focusing on a different aspect of aerospace math. This is a journey that connects classroom learning to real-world applications that power human ingenuity.
     """)
-
-    st.markdown("""
-    The height $h$ (in meters) of a projectile launched from the ground after $t$ seconds can be modeled by the equation:
-    """)
-    st.latex(r"h(t) = -4.9t^2 + v_0 t")
     
-    v0 = st.slider("Initial Velocity $v_0$ (m/s):", 10, 100, 50)
-    t_vals = np.linspace(0, 2*v0/9.8, 300)
-    h_vals = -4.9 * t_vals**2 + v0 * t_vals
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.markdown("""
+        <div class="module-card">
+            <h3>Module 1: Flight Trajectories</h3>
+            <p>The mathematics of flight paths using quadratic equations. Learn how to calculate a plane's altitude and trajectory.</p>
+            <small>Common Core Standards: A-REI.4b, F-IF.7a</small>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown("""
+        <div class="module-card">
+            <h3>Module 3: Rocket Science</h3>
+            <p>Exploring exponential growth and decay in rocket propulsion. Understand the Tsiolkovsky rocket equation and its impact on space travel.</p>
+            <small>Common Core Standards: A-CED.1, F-LE.1</small>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col2:
+        st.markdown("""
+        <div class="module-card">
+            <h3>Module 2: Orbital Mechanics</h3>
+            <p>Solving systems of linear equations to understand gravitational forces and satellite orbits. This module covers Kepler's Laws.</p>
+            <small>Common Core Standards: A-REI.5, A-REI.6</small>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown("""
+        <div class="module-card">
+            <h3>Module 4: The Flight Test</h3>
+            <p>A comprehensive quiz to test your knowledge across all key concepts. Put your new aerospace math skills to the test!</p>
+            <small>Assessment of all key concepts.</small>
+        </div>
+        """, unsafe_allow_html=True)
 
+# Module 1 content
+elif page == "✈️ Flight Trajectories":
+    st.title("✈️ Module 1: Flight Trajectories")
+    st.header("The Parabolic Path of Flight")
+    
+    st.markdown("""
+    <div class="standards-box">
+        <strong>📚 Relevant Common Core Standards:</strong>
+        <ul>
+            <li>A-REI.4b: Solve quadratic equations.</li>
+            <li>F-IF.7a: Graph quadratic functions, showing intercepts, maxima, and minima.</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("""
+    <div class="activity-box">
+        <h4>🎯 Activity: "Projectile Motion Simulator"</h4>
+        <p>The height $h$ (in meters) of a projectile launched from the ground after $t$ seconds can be modeled by the equation $h(t) = -4.9t^2 + v_0 t$, where $v_0$ is the initial vertical velocity. This equation is a quadratic function, and its graph is a parabola. The motion of an aircraft or rocket is a real-world example of this parabolic motion. </p>
+        <p>Use the slider below to change the initial velocity and see how it affects the projectile's flight path. Notice how a higher initial velocity results in a higher and longer flight.</p>
+        
+        <h5>Interactive Simulator</h5>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    initial_velocity = st.slider('Select Initial Velocity ($v_0$ in m/s)', 10, 100, 50, 5)
+    
+    # Calculate the time to reach the ground (t_final)
+    time_to_ground = initial_velocity / 4.9
+    
+    t = np.linspace(0, time_to_ground, 100)
+    h = -4.9 * t**2 + initial_velocity * t
+    
+    df = pd.DataFrame({'Time (s)': t, 'Height (m)': h})
+    
+    # Use a modern seaborn style for the plot
+    plt.style.use('seaborn-v0_8-whitegrid')
     fig, ax = plt.subplots()
-    ax.plot(t_vals, h_vals, label=f"v₀ = {v0} m/s", color="blue")
-    ax.set_xlabel("Time (s)")
-    ax.set_ylabel("Height (m)")
-    ax.set_title("Projectile Motion")
-    ax.grid(True)
-    ax.legend()
+    ax.plot(df['Time (s)'], df['Height (m)'], color='#12345e', linewidth=2)
+    ax.set_title('Projectile Trajectory', fontsize=16)
+    ax.set_xlabel('Time (s)', fontsize=12)
+    ax.set_ylabel('Height (m)', fontsize=12)
+    
     st.pyplot(fig)
-
-    st.success(f"Maximum height: {max(h_vals):.2f} meters")
-
-# Module 2
-elif page == "🛰️ Orbital Mechanics":
-    st.header("🛰️ Module 2: Orbital Mechanics")
-    st.latex(r"3x + 2y = 12")
-    st.latex(r"5x - y = 7")
-
-    st.subheader("🧮 Step-by-Step Elimination")
-
-    st.markdown("**Step 1: Multiply the second equation by 2**")
-    st.latex(r"2(5x - y) = 14 \Rightarrow 10x - 2y = 14")
-
-    st.markdown("**Step 2: Add the equations**")
-    st.latex(r"(3x + 2y) + (10x - 2y) = 12 + 14")
-    st.latex(r"13x = 26 \Rightarrow x = 2")
-
-    st.markdown("**Step 3: Substitute x into first equation**")
-    st.latex(r"3(2) + 2y = 12 \Rightarrow 6 + 2y = 12 \Rightarrow y = 3")
-
-    st.success("Final Answer: x = 2, y = 3")
-
-    fig, ax = plt.subplots()
-    x = np.linspace(0, 5, 100)
-    y1 = (12 - 3*x)/2
-    y2 = 5*x - 7
-    ax.plot(x, y1, label=r"3x + 2y = 12")
-    ax.plot(x, y2, label=r"5x - y = 7")
-    ax.plot(2, 3, 'ro', label='Solution (2, 3)')
-    ax.set_xlabel('x')
-    ax.set_ylabel('y')
-    ax.legend()
-    ax.grid(True)
-    st.pyplot(fig)
-
-# Module 3
-elif page == "🚀 Rocket Science":
-    st.header("🚀 Module 3: Rocket Science")
-    st.subheader("Exponential Decay in Fuel Mass")
-
-    st.markdown("""
-    A rocket's fuel mass (in tons) after $t$ minutes is modeled by:
-    """)
-    st.latex(r"M(t) = 1000 \cdot (0.9)^t")
-
-    t = st.slider("Time elapsed (minutes):", 0, 60, 10)
-    mass = 1000 * (0.9)**t
-    st.metric("Fuel Remaining (tons)", f"{mass:.2f}")
-
-    t_vals = np.linspace(0, 60, 300)
-    m_vals = 1000 * (0.9)**t_vals
-
-    fig, ax = plt.subplots()
-    ax.plot(t_vals, m_vals, label="M(t) = 1000 * (0.9)^t")
-    ax.axvline(t, color='red', linestyle='--', label=f't = {t} min')
-    ax.set_xlabel("Time (min)")
-    ax.set_ylabel("Fuel Mass (tons)")
-    ax.set_title("Rocket Fuel Consumption Over Time")
-    ax.grid(True)
-    ax.legend()
-    st.pyplot(fig)
-
-# Module 4: Aaron’s Lunar Mission
-elif page == "🧑🏾‍🚀 Aaron's Lunar Mission":
-    st.header("🧑🏾‍🚀 Aaron's Lunar Mission")
-    st.subheader("The Math of Interplanetary Travel")
-    st.markdown("""
-    We use the **distance-rate-time** formula to calculate how long Aaron's spacecraft will take to reach the Moon:
-
-    \[
-    	ext{Time} = rac{	ext{Distance}}{	ext{Speed}}
-    \]
-
-    **Where:**
-    - **Distance** is the total trip length (in miles)
-    - **Speed** is how fast the spacecraft travels (in miles per hour)
-    - **Time** is how long it takes to reach the Moon (in hours or days)
-
-    Use the slider below to see how different speeds change the trip duration!
-    """)
-
-    st.write("Aaron, a young aerospace pilot, is on a mission to the Moon to help with building a new power system.")
-
-    distance = 238900  # miles
-    speed = st.slider("Select spacecraft speed (mph):", 1000, 7000, 3500, 250)
-    time_hours = distance / speed
-    time_days = time_hours / 24
-
-    st.metric("Travel Time (days)", f"{time_days:.2f} days")
-
+    
+    # Calculate key metrics
+    max_height = (initial_velocity**2) / (4 * 4.9)
+    time_to_max = initial_velocity / (2 * 4.9)
+    total_time = initial_velocity / 4.9
+    
     st.markdown(f"""
-    ### 🧠 Calculation:
-    - Distance to Moon: **{distance} miles**
-    - Speed selected: **{speed} mph**
-    - Time to Moon: **{time_hours:.2f} hours** → **{time_days:.2f} days**
+    <div class="concept-box">
+        <h4>Analysis of this trajectory:</h4>
+        <ul>
+            <li><strong>Maximum Height:</strong> {max_height:.2f} meters</li>
+            <li><strong>Time to Maximum Height:</strong> {time_to_max:.2f} seconds</li>
+            <li><strong>Total Time in the Air:</strong> {total_time:.2f} seconds</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
+
+# Module 2 content
+elif page == "🛰️ Orbital Mechanics":
+    st.title("🛰️ Module 2: Orbital Mechanics")
+    st.header("The Math of Gravitational Forces")
+
+    st.markdown("""
+    <div class="standards-box">
+        <strong>📚 Relevant Common Core Standards:</strong>
+        <ul>
+            <li>A-REI.5: Prove that a new system with a multiple of another equation has the same solutions.</li>
+            <li>A-REI.6: Solve systems of linear equations.</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("""
+    <div class="activity-box">
+        <h4>🎯 Activity: "Solving for Force and Mass"</h4>
+        <p>In orbital mechanics, forces and masses must be in perfect balance for a stable orbit. This balance can be represented by a system of linear equations. Consider the following system of equations representing forces acting on a satellite:</p>
+    </div>
+    """)
+    
+    st.latex(r"""
+    3x + 2y = 12
+    """)
+    st.latex(r"""
+    5x - y = 7
     """)
 
-# Quiz Module
-elif page == "📊 Quiz: The Flight Test":
-    st.header("📊 The Flight Test")
+    st.markdown("""
+    <div class="activity-box">
+        <p>where $x$ and $y$ represent unknown variables. Your task is to solve this system for $x$ and $y$ to find the balanced state, which is the precise configuration for a stable orbit.</p>
+        
+        <h5>Solve the System:</h5>
+        
+        <p>Solution method using Elimination:</p>
+        <ol>
+            <li>Multiply the second equation by 2: $2(5x - y) = 2(7) \implies 10x - 2y = 14$</li>
+            <li>Add the modified second equation to the first: $(3x + 2y) + (10x - 2y) = 12 + 14$</li>
+            <li>This simplifies to $13x = 26$, so $x = 2$.</li>
+            <li>Substitute $x=2$ back into the first original equation: $3(2) + 2y = 12 \implies 6 + 2y = 12 \implies 2y = 6$, so $y = 3$.</li>
+        </ol>
+        
+        <p>The solution is $x=2$ and $y=3$.</p>
+    </div>
+    """, unsafe_allow_html=True)
 
-    st.subheader("1. Quadratic Trajectory")
-    st.write("A rocket's height is given by the equation:")
-    st.latex(r"h(t) = -16t^2 + 192t")
-    answer_1 = st.radio("What is the maximum height the rocket reaches?",
-                        ["A. 192 ft", "B. 576 ft", "C. 16 ft", "D. 384 ft"], index=None)
-    if answer_1:
-        if answer_1 == "B. 576 ft":
-            st.success("Correct! Max height is found at vertex: t = 6, h(6) = 576 ft.")
-        else:
-            st.error("Incorrect. Use vertex formula: t = -b/2a = 6, then compute h(6).")
+# Module 3 content
+elif page == "🚀 Rocket Science":
+    st.title("🚀 Module 3: Rocket Science")
+    st.header("Exponential Functions in Propulsion")
+    
+    st.markdown("""
+    <div class="standards-box">
+        <strong>📚 Relevant Common Core Standards:</strong>
+        <ul>
+            <li>A-CED.1: Create equations and inequalities to solve problems.</li>
+            <li>F-LE.1: Distinguish between linear and exponential functions.</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("""
+    <div class="activity-box">
+        <h4>🎯 Activity: "Simulating Rocket Fuel Consumption"</h4>
+        <p>A rocket's fuel consumption can be modeled by an exponential decay function. This is because a rocket expels a fraction of its remaining fuel over a given time interval. The mass of a rocket's fuel (in metric tons) over time is given by the function:</p>
+    </div>
+    """)
 
-    st.subheader("2. Solve the System")
-    st.write("Solve: 2x + y = 8 and x - y = 1")
-    user_input = st.text_input("Enter value of x:")
-    if user_input:
-        try:
-            if float(user_input) == 3:
-                st.success("Correct! x = 3")
-            else:
-                st.error("Incorrect. Try elimination or substitution.")
-        except:
-            st.warning("Please enter a valid number.")
+    st.latex(r"""
+    M(t) = 1000 \cdot (0.9)^t
+    """)
+    
+    st.markdown("""
+    <div class="activity-box">
+        <p>where $t$ is the time in minutes since launch.</p>
+        
+        <br>
+        
+        <h5>Interactive Simulation</h5>
+        
+        <p>Use the slider to see how the fuel mass changes over time. Observe how the rate of change is not constant, which is a key characteristic of exponential functions.</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    time_sim = st.slider('Time (t in minutes)', 0, 30, 0, 1)
+    fuel_mass = 1000 * (0.9)**time_sim
+    st.metric(label="Fuel Mass Remaining", value=f"{fuel_mass:.2f} tons")
 
-    st.subheader("3. Exponential Decay")
-    st.write("A satellite's solar panel efficiency drops 5% annually. What's the equation for E(t)?")
-    answer_3 = st.text_input("Enter equation for E(t):")
-    if answer_3:
-        if "100 * (0.95)**t" in answer_3.replace(" ", "") or "100*(0.95)^t" in answer_3.replace(" ", ""):
-            st.success("Correct! E(t) = 100 * (0.95)^t")
-        else:
-            st.error("Incorrect. Remember 5% loss means 95% remains.")
+    t_vals = np.linspace(0, 30, 300)
+    m_vals = 1000 * (0.9)**t_vals
+    
+    # Use a modern seaborn style for the plot
+    plt.style.use('seaborn-v0_8-whitegrid')
+    fig, ax = plt.subplots()
+    ax.plot(t_vals, m_vals, color='#4a7ab5', linewidth=2)
+    ax.axvline(x=time_sim, color='red', linestyle='--', label=f't = {time_sim} min')
+    ax.set_title('Rocket Fuel Mass vs. Time', fontsize=16)
+    ax.set_xlabel('Time (minutes)', fontsize=12)
+    ax.set_ylabel('Fuel Mass (tons)', fontsize=12)
+    ax.legend()
+    
+    st.pyplot(fig)
 
-# Resources
+# Aaron's Lunar Mission Module
+elif page == "👨‍🚀 Aaron's Lunar Mission":
+    st.title("👨‍🚀 Aaron's Lunar Mission")
+    st.header("The Math of Interplanetary Travel")
+    
+    st.markdown("""
+    <div class="activity-box">
+        <h4>🎯 Word Problem: "Aaron's Journey to the Moon"</h4>
+        <p>Aaron, an aerospace pilot, is on a mission to the Moon to help with the construction of a new power system. The average distance from the Earth to the Moon is approximately 238,900 miles. If his spacecraft travels at an average speed of 3,500 miles per hour, how many days will it take for him to reach the Moon?</p>
+        
+        <br>
+        
+        <p><strong>Hint:</strong> Remember the formula $distance = speed \times time$. You need to solve for time, and then convert the result from hours to days.</p>
+        
+        <br>
+        
+        <p><strong>Step-by-Step Solution:</strong></p>
+        <ol>
+            <li>Find the time in hours: $time = \frac{distance}{speed} = \frac{238,900}{3,500} \approx 68.26$ hours</li>
+            <li>Convert hours to days: $days = \frac{hours}{24} = \frac{68.26}{24} \approx 2.84$ days</li>
+        </ol>
+        
+        <p>Answer: It will take approximately **2.84 days** for Aaron to reach the Moon.</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+# External Resources Page
 elif page == "📚 External Resources":
-    st.header("📚 External Resources")
-    st.markdown("- [NASA's Fission Surface Power Project](https://www.nasa.gov/space-technology-mission-directorate/tdm/fission-surface-power/)")
-    st.markdown("- [NSBE Aerospace](https://www.nsbe-aerospace.org/)")
+    st.title("📚 External Resources")
+    st.header("Learn More About Aerospace Engineering")
+    
+    st.markdown("""
+    <div class="resources-box">
+        <p>For more information on real-world engineering problems, check out these links:</p>
+        <ul>
+            <li><a href="https://www.nasa.gov/space-technology-mission-directorate/tdm/fission-surface-power/" target="_blank">NASA's Fission Surface Power Project</a></li>
+            <li><a href="https://www.nsbe-aerospace.org/" target="_blank">National Society of Black Engineers (NSBE) Aerospace</a></li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
 
+# Quiz Page
+elif page == "📊 Quiz: The Flight Test":
+    st.title("📊 The Flight Test")
+    st.header("Test Your Knowledge")
+    
+    st.markdown("Answer the following questions to test your understanding of aerospace math concepts.")
+    
+    st.markdown("---")
+    
+    # Question 1
+    st.subheader("Question 1: Quadratic Trajectory")
+    st.write("A rocket's height is given by the function:")
+    st.latex(r"""
+    h(t) = -16t^2 + 192t
+    """)
+    st.write("What is the maximum height the rocket reaches?")
+    q1_options = ["A) 192 feet", "B) 576 feet", "C) 16 feet", "D) 12 seconds"]
+    q1_answer = st.radio("Choose your answer:", options=q1_options, index=None)
+    
+    if q1_answer is not None:
+        if q1_answer == "B) 576 feet":
+            st.success("Correct! The maximum height is found at the vertex of the parabola.")
+        else:
+            st.error("Incorrect. The maximum height is at the vertex, which occurs at $t = -b/(2a)$. In this case, $t = -192/(2 * -16) = 6$ seconds. Plugging this back in, $h(6) = -16(6^2) + 192(6) = 576$ feet.")
+    
+    st.markdown("---")
+    
+    # Question 2
+    st.subheader("Question 2: Systems of Equations")
+    st.write("A force analysis results in the following system:")
+    st.latex(r"""
+    2x + y = 8
+    """)
+    st.latex(r"""
+    x - y = 1
+    """)
+    st.write("What is the value of x?")
+    q2_answer = st.text_input("Enter your answer for x:", key="q2_input")
+    
+    if q2_answer:
+        try:
+            if float(q2_answer) == 3:
+                st.success("Correct! Adding the two equations eliminates y, giving you $3x = 9$, which simplifies to $x=3$.")
+            else:
+                st.error("Incorrect. Try solving the system of equations using elimination or substitution. Adding the two equations gives $3x = 9$.")
+        except ValueError:
+            st.error("Please enter a valid number.")
+            
+    st.markdown("---")
+
+    # Question 3
+    st.subheader("Question 3: Exponential Decay")
+    st.write("A satellite's solar panel efficiency decreases by 5% each year. If its initial efficiency is 100%, what is the equation for its efficiency $E(t)$ after $t$ years?")
+    q3_answer = st.text_input("Enter your equation (e.g., E(t) = 100 * (0.5)^t):", key="q3_input")
+    
+    if q3_answer:
+        if "100 * (0.95)**t" in q3_answer or "100 * (0.95)^t" in q3_answer or "100 * (0.95)t" in q3_answer:
+            st.success("Correct! An exponential decay function is used, and a 5% decrease means you are left with 95% of the original amount, or 0.95.")
+        else:
+            st.error("Incorrect. Remember that a 5% decrease is modeled by multiplying by 0.95 each year. The correct equation is $E(t) = 100 \cdot (0.95)^t$.")
+    
+st.markdown("---")
 st.markdown("""
----
-<p style='text-align: center;'>
-<em>"The launch is just the beginning. The math is what takes you to the stars."</em><br>
-A product of Cognitive Cloud Education.
-</p>
+<div style="text-align: center; padding: 20px; color: #666; font-style: italic;">
+    <p><em>"The launch is just the beginning. The math is what takes you to the stars."</em></p>
+    <p>A product of Cognitive Cloud Education.</p>
+</div>
 """, unsafe_allow_html=True)
