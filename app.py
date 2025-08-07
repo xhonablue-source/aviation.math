@@ -29,7 +29,7 @@ st.markdown("""
         color: #e0e7ff;
         padding: 2.5rem;
         border-radius: 15px;
-        text-align: center;
+        text-align: center; /* This centers the text inside the header */
         margin-bottom: 2rem;
         box-shadow: 0 8px 16px rgba(0,0,0,0.3);
     }
@@ -120,10 +120,6 @@ st.markdown("""
 # Header
 st.markdown("""
 <div class="main-header">
-    <div style="display: flex; justify-content: center; align-items: center;">
-        <img src="uploaded:image_d3ad68.png-0eb619c3-738f-44ce-9371-46676b71948c" alt="Cognitive Cloud Button" style="max-width: 150px; height: auto;">
-    </div>
-    <h3 style="margin-top: 1rem;">Cognitive Cloud</h3>
     <h1>✈️ AEROSPACE 🚀</h1>
     <h3>An Interactive Math & Engineering Curriculum</h3>
     <p>Exploring the mathematics behind flight and space exploration</p>
@@ -141,12 +137,12 @@ page = st.sidebar.selectbox(
 # Home Page
 if page == "🏠 Home & Overview":
     st.markdown("""
-    <h2>Welcome to the Aerospace Curriculum!</h2>
+    ## Welcome to the Aerospace Curriculum!
 
-    <p>This program is designed to explore key mathematical concepts through the lens of aerospace engineering. You will discover how algebra, trigonometry, and calculus are essential tools for designing aircraft, launching rockets, and navigating the solar system.</p>
+    This program is designed to explore key mathematical concepts through the lens of aerospace engineering. You will discover how algebra, trigonometry, and calculus are essential tools for designing aircraft, launching rockets, and navigating the solar system.
 
-    <p>The curriculum is structured into four main modules, each focusing on a different aspect of aerospace math. This is a journey that connects classroom learning to real-world applications that power human ingenuity.</p>
-    """, unsafe_allow_html=True)
+    The curriculum is structured into four main modules, each focusing on a different aspect of aerospace math. This is a journey that connects classroom learning to real-world applications that power human ingenuity.
+    """)
     
     col1, col2 = st.columns(2)
     
