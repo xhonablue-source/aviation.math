@@ -15,8 +15,7 @@ st.set_page_config(
 st.title("                    ✈️ AEROSPACE 🚀")
 st.subheader("    An Interactive Math & Engineering Curriculum")
 st.write("Exploring the mathematics behind flight and space exploration
-
-         ")
+")
 
 # Sidebar navigation
 st.sidebar.title("📚 Modules")
