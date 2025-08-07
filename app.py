@@ -27,9 +27,9 @@ page = st.sidebar.selectbox(
 # Home Page
 if page == "🏠 Home & Overview":
     st.header("Welcome to the Aerospace Curriculum!")
-    st.write("""
-        This program is designed to explore key mathematical concepts through the lens of aerospace engineering. You will discover how algebra, trigonometry, and calculus are essential tools for designing aircraft, launching rockets, and navigating the solar system.
-    """)
+    st.markdown("""
+This program is designed to explore key mathematical concepts through the lens of aerospace engineering. You will discover how algebra, trigonometry, and calculus are essential tools for designing aircraft, launching rockets, and navigating the solar system.
+""")
     
     cols = st.columns(2)
     with cols[0]:
@@ -57,9 +57,22 @@ if page == "🏠 Home & Overview":
         """)
 
 # Module 1
-elif page == "✈️ Flight Trajectories":
+elif page == \"✈️ Flight Trajectories\":
     st.header("✈️ Module 1: Flight Trajectories")
     st.subheader("The Parabolic Path of Flight")
+    st.markdown("""
+    In this module, we examine the equation of a projectile's vertical motion:
+    
+    $$h(t) = -4.9t^2 + v_0 t$$
+
+    **Where:**
+    - $h(t)$ is the height (in meters) after $t$ seconds
+    - $t$ is time in seconds since launch
+    - $v_0$ is the initial vertical velocity (in meters per second)
+    - The constant -4.9 represents half of the gravitational acceleration ($g pprox 9.8$ m/s²) on Earth
+    
+    This formula models the upward and downward motion of an object launched straight up.
+    """)
 
     st.markdown("""
     The height $h$ (in meters) of a projectile launched from the ground after $t$ seconds can be modeled by the equation:
@@ -145,6 +158,20 @@ elif page == "🚀 Rocket Science":
 elif page == "🧑🏾‍🚀 Aaron's Lunar Mission":
     st.header("🧑🏾‍🚀 Aaron's Lunar Mission")
     st.subheader("The Math of Interplanetary Travel")
+    st.markdown("""
+    We use the **distance-rate-time** formula to calculate how long Aaron's spacecraft will take to reach the Moon:
+
+    \[
+    	ext{Time} = rac{	ext{Distance}}{	ext{Speed}}
+    \]
+
+    **Where:**
+    - **Distance** is the total trip length (in miles)
+    - **Speed** is how fast the spacecraft travels (in miles per hour)
+    - **Time** is how long it takes to reach the Moon (in hours or days)
+
+    Use the slider below to see how different speeds change the trip duration!
+    """)
 
     st.write("Aaron, a young aerospace pilot, is on a mission to the Moon to help with building a new power system.")
 
@@ -206,6 +233,8 @@ elif page == "📚 External Resources":
 
 st.markdown("""
 ---
-<center><em>"The launch is just the beginning. The math is what takes you to the stars."</em><br>
-A product of Cognitive Cloud Education.</center>
-""")
+<p style='text-align: center;'>
+<em>"The launch is just the beginning. The math is what takes you to the stars."</em><br>
+A product of Cognitive Cloud Education.
+</p>
+""", unsafe_allow_html=True)
