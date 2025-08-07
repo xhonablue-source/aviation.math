@@ -27,10 +27,10 @@ page = st.sidebar.selectbox(
 # Home Page
 if page == "🏠 Home & Overview":
     st.header("Welcome to the Aerospace Curriculum!")
-    st.write("""
-        This program is designed to explore key mathematical concepts through the lens of aerospace engineering. You will discover how algebra, trigonometry, and calculus are essential tools for designing aircraft, launching rockets, and navigating the solar system.
-    """)
-    
+    st.markdown("""
+This program is designed to explore key mathematical concepts through the lens of aerospace engineering. You will discover how algebra, trigonometry, and calculus are essential tools for designing aircraft, launching rockets, and navigating the solar system.
+""")
+
     cols = st.columns(2)
     with cols[0]:
         st.info("""
@@ -43,7 +43,7 @@ if page == "🏠 Home & Overview":
         Exploring exponential growth and decay in rocket propulsion. Understand the Tsiolkovsky rocket equation and its impact on space travel.  
         Common Core Standards: A-CED.1, F-LE.1
         """)
-    
+
     with cols[1]:
         st.info("""
         **Module 2: Orbital Mechanics**  
@@ -60,12 +60,20 @@ if page == "🏠 Home & Overview":
 elif page == "✈️ Flight Trajectories":
     st.header("✈️ Module 1: Flight Trajectories")
     st.subheader("The Parabolic Path of Flight")
-
     st.markdown("""
-    The height $h$ (in meters) of a projectile launched from the ground after $t$ seconds can be modeled by the equation:
+    In this module, we examine the equation of a projectile's vertical motion:
+
+    $$h(t) = -4.9t^2 + v_0 t$$
+
+    **Where:**
+    - $h(t)$ is the height (in meters) after $t$ seconds
+    - $t$ is time in seconds since launch
+    - $v_0$ is the initial vertical velocity (in meters per second)
+    - The constant -4.9 represents half of the gravitational acceleration ($g \approx 9.8$ m/s²) on Earth
+
+    This formula models the upward and downward motion of an object launched straight up.
     """)
-    st.latex(r"h(t) = -4.9t^2 + v_0 t")
-    
+
     v0 = st.slider("Initial Velocity $v_0$ (m/s):", 10, 100, 50)
     t_vals = np.linspace(0, 2*v0/9.8, 300)
     h_vals = -4.9 * t_vals**2 + v0 * t_vals
@@ -90,14 +98,14 @@ elif page == "🛰️ Orbital Mechanics":
     st.subheader("🧮 Step-by-Step Elimination")
 
     st.markdown("**Step 1: Multiply the second equation by 2**")
-    st.latex(r"2(5x - y) = 14 \Rightarrow 10x - 2y = 14")
+    st.latex(r"2(5x - y) = 14 \\Rightarrow 10x - 2y = 14")
 
     st.markdown("**Step 2: Add the equations**")
     st.latex(r"(3x + 2y) + (10x - 2y) = 12 + 14")
-    st.latex(r"13x = 26 \Rightarrow x = 2")
+    st.latex(r"13x = 26 \\Rightarrow x = 2")
 
     st.markdown("**Step 3: Substitute x into first equation**")
-    st.latex(r"3(2) + 2y = 12 \Rightarrow 6 + 2y = 12 \Rightarrow y = 3")
+    st.latex(r"3(2) + 2y = 12 \\Rightarrow 6 + 2y = 12 \\Rightarrow y = 3")
 
     st.success("Final Answer: x = 2, y = 3")
 
@@ -122,7 +130,7 @@ elif page == "🚀 Rocket Science":
     st.markdown("""
     A rocket's fuel mass (in tons) after $t$ minutes is modeled by:
     """)
-    st.latex(r"M(t) = 1000 \cdot (0.9)^t")
+    st.latex(r"M(t) = 1000 \\cdot (0.9)^t")
 
     t = st.slider("Time elapsed (minutes):", 0, 60, 10)
     mass = 1000 * (0.9)**t
@@ -146,6 +154,27 @@ elif page == "🧑🏾‍🚀 Aaron's Lunar Mission":
     st.header("🧑🏾‍🚀 Aaron's Lunar Mission")
     st.subheader("The Math of Interplanetary Travel")
 
+    st.markdown("""
+    We use the **distance-rate-time** formula to calculate how long Aaron's spacecraft will take to reach the Moon:
+
+    \[
+    \text{Time} = \frac{\text{Distance}}{\text{Speed}} \quad \text{and} \quad \text{Speed} = \frac{\text{Distance}}{\text{Time}} \quad \text{and} \quad \text{Distance} = \text{Speed} \times \text{Time}
+    \]
+
+    To convert from hours to days:
+
+    \[
+    \text{Days} = \frac{\text{Hours}}{24}
+    \]
+
+    **Where:**
+    - **Distance** is the total trip length (in miles)
+    - **Speed** is how fast the spacecraft travels (in miles per hour)
+    - **Time** is how long it takes to reach the Moon (in hours or days)
+
+    Use the slider below to see how different speeds change the trip duration!
+    """)
+
     st.write("Aaron, a young aerospace pilot, is on a mission to the Moon to help with building a new power system.")
 
     distance = 238900  # miles
@@ -164,49 +193,16 @@ elif page == "🧑🏾‍🚀 Aaron's Lunar Mission":
 
 # Quiz Module
 elif page == "📊 Quiz: The Flight Test":
-    st.header("📊 The Flight Test")
-
-    st.subheader("1. Quadratic Trajectory")
-    st.write("A rocket's height is given by the equation:")
-    st.latex(r"h(t) = -16t^2 + 192t")
-    answer_1 = st.radio("What is the maximum height the rocket reaches?",
-                        ["A. 192 ft", "B. 576 ft", "C. 16 ft", "D. 384 ft"], index=None)
-    if answer_1:
-        if answer_1 == "B. 576 ft":
-            st.success("Correct! Max height is found at vertex: t = 6, h(6) = 576 ft.")
-        else:
-            st.error("Incorrect. Use vertex formula: t = -b/2a = 6, then compute h(6).")
-
-    st.subheader("2. Solve the System")
-    st.write("Solve: 2x + y = 8 and x - y = 1")
-    user_input = st.text_input("Enter value of x:")
-    if user_input:
-        try:
-            if float(user_input) == 3:
-                st.success("Correct! x = 3")
-            else:
-                st.error("Incorrect. Try elimination or substitution.")
-        except:
-            st.warning("Please enter a valid number.")
-
-    st.subheader("3. Exponential Decay")
-    st.write("A satellite's solar panel efficiency drops 5% annually. What's the equation for E(t)?")
-    answer_3 = st.text_input("Enter equation for E(t):")
-    if answer_3:
-        if "100 * (0.95)**t" in answer_3.replace(" ", "") or "100*(0.95)^t" in answer_3.replace(" ", ""):
-            st.success("Correct! E(t) = 100 * (0.95)^t")
-        else:
-            st.error("Incorrect. Remember 5% loss means 95% remains.")
+    ...
 
 # Resources
 elif page == "📚 External Resources":
-    st.header("📚 External Resources")
-    st.markdown("- [NASA's Fission Surface Power Project](https://www.nasa.gov/space-technology-mission-directorate/tdm/fission-surface-power/)")
-    st.markdown("- [NSBE Aerospace](https://www.nsbe-aerospace.org/)")
+    ...
 
 st.markdown("""
 ---
-<center><em>"The launch is just the beginning. The math is what takes you to the stars."</em><br>
-A product of Cognitive Cloud Education.</center>
-""")
-
+<div style='text-align: center; font-style: italic; font-size: 1.1rem;'>
+"The launch is just the beginning. The math is what takes you to the stars."<br>
+<span style='font-style: normal;'>A product of <strong>Cognitive Cloud Education</strong>.</span>
+</div>
+""", unsafe_allow_html=True)
