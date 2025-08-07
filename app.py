@@ -3,6 +3,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
+# --- Developer Credit ---
+st.markdown("### www.cognitivecloud.ai")
+st.markdown("**Developed by Xavier Honablue M.Ed**")
+
 # Page configuration
 st.set_page_config(
     page_title="AEROSPACE: Interactive Math & Engineering Curriculum",
