@@ -209,3 +209,4 @@ st.markdown("""
 <center><em>"The launch is just the beginning. The math is what takes you to the stars."</em><br>
 A product of Cognitive Cloud Education.</center>
 """)
+
