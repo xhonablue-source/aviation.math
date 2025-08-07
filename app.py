@@ -130,7 +130,7 @@ elif page == "🚀 Rocket Science":
     st.markdown("""
     A rocket's fuel mass (in tons) after $t$ minutes is modeled by:
     """)
-    st.latex(r"M(t) = 1000 \\cdot (0.9)^t")
+    st.latex(r"M(t) = 1000 \cdot (0.9)^t")
 
     t = st.slider("Time elapsed (minutes):", 0, 60, 10)
     mass = 1000 * (0.9)**t
@@ -156,17 +156,16 @@ elif page == "🧑🏾‍🚀 Aaron's Lunar Mission":
 
     st.markdown("""
     We use the **distance-rate-time** formula to calculate how long Aaron's spacecraft will take to reach the Moon:
+    """)
 
-    \[
-    \text{Time} = \frac{\text{Distance}}{\text{Speed}} \quad \text{and} \quad \text{Speed} = \frac{\text{Distance}}{\text{Time}} \quad \text{and} \quad \text{Distance} = \text{Speed} \times \text{Time}
-    \]
+    st.latex(r"\text{Time} = \frac{\text{Distance}}{\text{Speed}} \quad \text{and} \quad \text{Speed} = \frac{\text{Distance}}{\text{Time}} \quad \text{and} \quad \text{Distance} = \text{Speed} \times \text{Time}")
 
+    st.markdown("""
     To convert from hours to days:
+    """)
+    st.latex(r"\text{Days} = \frac{\text{Hours}}{24}")
 
-    \[
-    \text{Days} = \frac{\text{Hours}}{24}
-    \]
-
+    st.markdown("""
     **Where:**
     - **Distance** is the total trip length (in miles)
     - **Speed** is how fast the spacecraft travels (in miles per hour)
