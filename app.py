@@ -24,6 +24,30 @@ st.markdown("""
         color: #333333;
     }
     
+    .top-header {
+        text-align: center;
+        margin-bottom: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .top-header img {
+        width: 100px;
+        height: auto;
+        cursor: pointer;
+    }
+    .top-header p {
+        margin-top: 0.5rem;
+    }
+    .top-header a {
+        color: #0a1f44;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+    .top-header a:hover {
+        color: #4a7ab5;
+    }
+
     .main-header {
         background: linear-gradient(45deg, #0a1f44, #12345e);
         color: #e0e7ff;
@@ -70,7 +94,7 @@ st.markdown("""
         padding: 1rem;
         border-radius: 8px;
         margin: 1rem 0;
-        border-left: 4px solid #00a2d9;
+        border-left: 4-x solid #00a2d9;
     }
     .resources-box {
         background: #e6fff0;
@@ -117,7 +141,20 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Header
+# Top header for brand and developer credit
+st.markdown("""
+<div class="top-header">
+    <a href="https://cognitivecloud-launcher.streamlit.app/#cognitive-cloud-ai-app-launcher" target="_blank">
+        <img src="https://googleusercontent.com/file_content/1" alt="Cognitive Cloud Button">
+    </a>
+    <p style="margin-top: 0.5rem;">
+        cognitivecloud.ai developed by 
+        <a href="https://cognitivecloud-launcher.streamlit.app/#cognitive-cloud-ai-app-launcher" target="_blank">Xavier Honablue M.Ed</a>
+    </p>
+</div>
+""", unsafe_allow_html=True)
+
+# Original header
 st.markdown("""
 <div class="main-header">
     <h1>✈️ AEROSPACE 🚀</h1>
