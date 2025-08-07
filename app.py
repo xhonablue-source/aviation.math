@@ -24,36 +24,12 @@ st.markdown("""
         color: #333333;
     }
     
-    .top-header {
-        text-align: center;
-        margin-bottom: 1rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .top-header img {
-        width: 100px;
-        height: auto;
-        cursor: pointer;
-    }
-    .top-header p {
-        margin-top: 0.5rem;
-    }
-    .top-header a {
-        color: #0a1f44;
-        text-decoration: none;
-        transition: color 0.3s ease;
-    }
-    .top-header a:hover {
-        color: #4a7ab5;
-    }
-
     .main-header {
         background: linear-gradient(45deg, #0a1f44, #12345e);
         color: #e0e7ff;
         padding: 2.5rem;
         border-radius: 15px;
-        text-align: center; /* This centers the text inside the header */
+        text-align: center;
         margin-bottom: 2rem;
         box-shadow: 0 8px 16px rgba(0,0,0,0.3);
     }
@@ -94,7 +70,7 @@ st.markdown("""
         padding: 1rem;
         border-radius: 8px;
         margin: 1rem 0;
-        border-left: 4-x solid #00a2d9;
+        border-left: 4px solid #00a2d9;
     }
     .resources-box {
         background: #e6fff0;
@@ -141,22 +117,13 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Top header for brand and developer credit
-st.markdown("""
-<div class="top-header">
-    <a href="https://cognitivecloud-launcher.streamlit.app/#cognitive-cloud-ai-app-launcher" target="_blank">
-        <img src="https://googleusercontent.com/file_content/1" alt="Cognitive Cloud Button">
-    </a>
-    <p style="margin-top: 0.5rem;">
-        cognitivecloud.ai developed by 
-        <a href="https://cognitivecloud-launcher.streamlit.app/#cognitive-cloud-ai-app-launcher" target="_blank">Xavier Honablue M.Ed</a>
-    </p>
-</div>
-""", unsafe_allow_html=True)
-
-# Original header
+# Header
 st.markdown("""
 <div class="main-header">
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <img src="uploaded:image_d3ad68.png-0eb619c3-738f-44ce-9371-46676b71948c" alt="Cognitive Cloud Button" style="max-width: 150px; height: auto;">
+    </div>
+    <h3 style="margin-top: 1rem;">Cognitive Cloud</h3>
     <h1>✈️ AEROSPACE 🚀</h1>
     <h3>An Interactive Math & Engineering Curriculum</h3>
     <p>Exploring the mathematics behind flight and space exploration</p>
@@ -174,12 +141,12 @@ page = st.sidebar.selectbox(
 # Home Page
 if page == "🏠 Home & Overview":
     st.markdown("""
-    ## Welcome to the Aerospace Curriculum!
+    <h2>Welcome to the Aerospace Curriculum!</h2>
 
-    This program is designed to explore key mathematical concepts through the lens of aerospace engineering. You will discover how algebra, trigonometry, and calculus are essential tools for designing aircraft, launching rockets, and navigating the solar system.
+    <p>This program is designed to explore key mathematical concepts through the lens of aerospace engineering. You will discover how algebra, trigonometry, and calculus are essential tools for designing aircraft, launching rockets, and navigating the solar system.</p>
 
-    The curriculum is structured into four main modules, each focusing on a different aspect of aerospace math. This is a journey that connects classroom learning to real-world applications that power human ingenuity.
-    """)
+    <p>The curriculum is structured into four main modules, each focusing on a different aspect of aerospace math. This is a journey that connects classroom learning to real-world applications that power human ingenuity.</p>
+    """, unsafe_allow_html=True)
     
     col1, col2 = st.columns(2)
     
