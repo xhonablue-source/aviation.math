@@ -90,7 +90,7 @@ elif page == "✈️ Flight Trajectories":
 
     st.success(f"Maximum height: {max(h_vals):.2f} meters")
 
-# Quiz Module: LLM-enhanced Feedback
+# Quiz Module: Auto LLM Feedback
 elif page == "📊 Quiz: The Flight Test":
     st.header("📊 The Flight Test")
 
@@ -99,79 +99,60 @@ elif page == "📊 Quiz: The Flight Test":
     st.latex(r"h(t) = -16t^2 + 192t")
     answer_1 = st.radio("What is the maximum height the rocket reaches?",
                         ["A. 192 ft", "B. 576 ft", "C. 16 ft", "D. 384 ft"], index=None)
-
-    feedback_1 = ""
     if answer_1:
         if answer_1 == "B. 576 ft":
             st.success("Correct! Max height is found at vertex: t = 6, h(6) = 576 ft.")
         else:
-            feedback_1 = "To find the vertex of a quadratic equation in the form ax^2 + bx + c, use t = -b/2a. Here, a = -16 and b = 192."
-            st.error(feedback_1)
+            st.error("Incorrect.")
+            with st.spinner("Dr. X is explaining why..."):
+                feedback = openai.ChatCompletion.create(
+                    model="gpt-4",
+                    messages=[
+                        {"role": "system", "content": "You are Dr. X, a math coach."},
+                        {"role": "user", "content": f"The student chose: {answer_1}. The correct answer is B. 576 ft. Explain how to solve this using the vertex formula and encourage them."}
+                    ]
+                )
+                st.info(feedback["choices"][0]["message"]["content"])
 
     st.subheader("2. Solve the System")
     st.write("Solve: 2x + y = 8 and x - y = 1")
     user_input = st.text_input("Enter value of x:")
-    feedback_2 = ""
     if user_input:
         try:
             if float(user_input) == 3:
                 st.success("Correct! x = 3")
             else:
-                feedback_2 = "Try using elimination: Add both equations after isolating variables."
-                st.error("Incorrect. Try elimination or substitution.")
+                st.error("Incorrect.")
+                with st.spinner("Dr. X is analyzing your response..."):
+                    prompt = f"The student guessed x = {user_input}. Solve the system: 2x + y = 8 and x - y = 1. Help them understand using substitution or elimination."
+                    response = openai.ChatCompletion.create(
+                        model="gpt-4",
+                        messages=[
+                            {"role": "system", "content": "You are Dr. X, a supportive algebra coach."},
+                            {"role": "user", "content": prompt}
+                        ]
+                    )
+                    st.info(response["choices"][0]["message"]["content"])
         except:
-            feedback_2 = "Make sure you're entering a numeric value."
             st.warning("Please enter a valid number.")
-
-    if user_input:
-        if st.button("🤖 Dr. X Help on Question 2"):
-            with st.spinner("Dr. X is analyzing your response..."):
-                prompt_2 = f"""
-                The student attempted to solve a system: 
-                2x + y = 8 and x - y = 1
-                Their input for x was: {user_input}.
-                Feedback so far: {feedback_2}
-                Provide a clear explanation of how to solve this using substitution or elimination.
-                End with one encouragement and a mindset-building resource.
-                """
-                response_2 = openai.ChatCompletion.create(
-                    model="gpt-4",
-                    messages=[
-                        {"role": "system", "content": "You are Dr. X, a math coach helping a student understand how to solve systems of equations using elimination or substitution."},
-                        {"role": "user", "content": prompt_2}
-                    ]
-                )
-                st.info(response_2["choices"][0]["message"]["content"])
 
     st.subheader("3. Exponential Decay")
     st.write("A satellite's solar panel efficiency drops 5% annually. What's the equation for E(t)?")
     answer_3 = st.text_input("Enter equation for E(t):")
-    feedback_3 = ""
     if answer_3:
         if "100 * (0.95)**t" in answer_3.replace(" ", "") or "100*(0.95)^t" in answer_3.replace(" ", ""):
             st.success("Correct! E(t) = 100 * (0.95)^t")
         else:
-            feedback_3 = "A 5% decrease per year means the multiplier is 0.95."
-            st.error("Incorrect. Remember 5% loss means 95% remains.")
-
-    if answer_3:
-        if st.button("🤖 Dr. X Help on Question 3"):
-            with st.spinner("Dr. X is reviewing exponential decay..."):
-                prompt_3 = f"""
-                The student was asked to write the exponential decay function for a solar panel losing 5% efficiency annually.
-                Their response: {answer_3}
-                Feedback so far: {feedback_3}
-                Provide an explanation of why the decay factor is 0.95 and how to set up E(t).
-                End with one kind encouragement and link to a growth mindset activity.
-                """
-                response_3 = openai.ChatCompletion.create(
+            st.error("Incorrect.")
+            with st.spinner("Dr. X is helping explain the decay rule..."):
+                response = openai.ChatCompletion.create(
                     model="gpt-4",
                     messages=[
-                        {"role": "system", "content": "You are Dr. X, helping a student understand exponential decay in a supportive tone."},
-                        {"role": "user", "content": prompt_3}
+                        {"role": "system", "content": "You are Dr. X, explaining exponential decay kindly."},
+                        {"role": "user", "content": f"The student entered: {answer_3}. Explain how 0.95 is derived and encourage them."}
                     ]
                 )
-                st.info(response_3["choices"][0]["message"]["content"])
+                st.info(response["choices"][0]["message"]["content"])
 
     with st.expander("🧠 Formula Reminder: Distance = Speed × Time"):
         st.markdown("""
@@ -180,24 +161,6 @@ elif page == "📊 Quiz: The Flight Test":
         - To find **Time**, divide distance by speed.
         - To convert **hours to days**, divide by 24.
         """)
-
-    if st.button("🤖 Get Dr. X Feedback"):
-        feedback_prompt = f"""
-        Student Quiz Responses Feedback:
-        1. Quadratic Trajectory: {answer_1} - {feedback_1}
-        2. Solve System: {user_input} - {feedback_2}
-        3. Exponential Decay: {answer_3} - {feedback_3}
-        """
-        with st.spinner("Dr. X is reviewing your answers..."):
-            response = openai.ChatCompletion.create(
-                model="gpt-4",
-                messages=[
-                    {"role": "system", "content": "You are Dr. X, an encouraging math coach for middle and high school students. Provide clear, helpful feedback on each answer. End with a growth mindset resource."},
-                    {"role": "user", "content": feedback_prompt}
-                ]
-            )
-            st.success("Here's what Dr. X says:")
-            st.markdown(response["choices"][0]["message"]["content"])
 
 # Resources
 elif page == "📚 External Resources":
