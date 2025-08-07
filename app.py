@@ -90,41 +90,6 @@ elif page == "✈️ Flight Trajectories":
 
     st.success(f"Maximum height: {max(h_vals):.2f} meters")
 
-# Module 2
-elif page == "🛰️ Orbital Mechanics":
-    st.header("🛰️ Module 2: Orbital Mechanics")
-    st.latex(r"3x + 2y = 12")
-    st.latex(r"5x - y = 7")
-
-    st.subheader("🧮 Step-by-Step Elimination")
-
-    st.markdown("**Step 1: Multiply the second equation by 2**")
-    st.latex(r"2(5x - y) = 14 \\Rightarrow 10x - 2y = 14")
-
-    st.markdown("**Step 2: Add the equations**")
-    st.latex(r"(3x + 2y) + (10x - 2y) = 12 + 14")
-    st.latex(r"13x = 26 \\Rightarrow x = 2")
-
-    st.markdown("**Step 3: Substitute x into first equation**")
-    st.latex(r"3(2) + 2y = 12 \\Rightarrow 6 + 2y = 12 \\Rightarrow y = 3")
-
-    st.success("Final Answer: x = 2, y = 3")
-
-    fig, ax = plt.subplots()
-    x = np.linspace(0, 5, 100)
-    y1 = (12 - 3*x)/2
-    y2 = 5*x - 7
-    ax.plot(x, y1, label=r"3x + 2y = 12")
-    ax.plot(x, y2, label=r"5x - y = 7")
-    ax.plot(2, 3, 'ro', label='Solution (2, 3)')
-    ax.set_xlabel('x')
-    ax.set_ylabel('y')
-    ax.legend()
-    ax.grid(True)
-    st.pyplot(fig)
-
-# (Other modules remain unchanged)
-
 # Quiz Module: LLM-enhanced Feedback
 elif page == "📊 Quiz: The Flight Test":
     st.header("📊 The Flight Test")
@@ -158,6 +123,26 @@ elif page == "📊 Quiz: The Flight Test":
             feedback_2 = "Make sure you're entering a numeric value."
             st.warning("Please enter a valid number.")
 
+    if user_input:
+        if st.button("🤖 Dr. X Help on Question 2"):
+            with st.spinner("Dr. X is analyzing your response..."):
+                prompt_2 = f"""
+                The student attempted to solve a system: 
+                2x + y = 8 and x - y = 1
+                Their input for x was: {user_input}.
+                Feedback so far: {feedback_2}
+                Provide a clear explanation of how to solve this using substitution or elimination.
+                End with one encouragement and a mindset-building resource.
+                """
+                response_2 = openai.ChatCompletion.create(
+                    model="gpt-4",
+                    messages=[
+                        {"role": "system", "content": "You are Dr. X, a math coach helping a student understand how to solve systems of equations using elimination or substitution."},
+                        {"role": "user", "content": prompt_2}
+                    ]
+                )
+                st.info(response_2["choices"][0]["message"]["content"])
+
     st.subheader("3. Exponential Decay")
     st.write("A satellite's solar panel efficiency drops 5% annually. What's the equation for E(t)?")
     answer_3 = st.text_input("Enter equation for E(t):")
@@ -169,7 +154,33 @@ elif page == "📊 Quiz: The Flight Test":
             feedback_3 = "A 5% decrease per year means the multiplier is 0.95."
             st.error("Incorrect. Remember 5% loss means 95% remains.")
 
-    # LLM Feedback Button
+    if answer_3:
+        if st.button("🤖 Dr. X Help on Question 3"):
+            with st.spinner("Dr. X is reviewing exponential decay..."):
+                prompt_3 = f"""
+                The student was asked to write the exponential decay function for a solar panel losing 5% efficiency annually.
+                Their response: {answer_3}
+                Feedback so far: {feedback_3}
+                Provide an explanation of why the decay factor is 0.95 and how to set up E(t).
+                End with one kind encouragement and link to a growth mindset activity.
+                """
+                response_3 = openai.ChatCompletion.create(
+                    model="gpt-4",
+                    messages=[
+                        {"role": "system", "content": "You are Dr. X, helping a student understand exponential decay in a supportive tone."},
+                        {"role": "user", "content": prompt_3}
+                    ]
+                )
+                st.info(response_3["choices"][0]["message"]["content"])
+
+    with st.expander("🧠 Formula Reminder: Distance = Speed × Time"):
+        st.markdown("""
+        - **Formula:** `Distance = Speed × Time`
+        - To find **Distance**, multiply speed and time.
+        - To find **Time**, divide distance by speed.
+        - To convert **hours to days**, divide by 24.
+        """)
+
     if st.button("🤖 Get Dr. X Feedback"):
         feedback_prompt = f"""
         Student Quiz Responses Feedback:
