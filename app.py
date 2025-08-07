@@ -151,7 +151,12 @@ elif page == "🚀 Rocket Science":
 
 # Module 4: Aaron’s Lunar Mission
 elif page == "🧑🏾‍🚀 Aaron's Lunar Mission":
-    st.header("🧑🏾‍🚀 Aaron's Lunar Mission")
+    st.markdown("""
+    <div style='text-align: center;'>
+        <h1>🧑🏾‍🚀 Aaron's Lunar Mission</h1>
+    </div>
+    """, unsafe_allow_html=True)
+
     st.subheader("The Math of Interplanetary Travel")
 
     st.markdown("""
